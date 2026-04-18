@@ -1,0 +1,86 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "role": { "type": "string", "enum": ["owner", "applicant"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Property": {
+      "title": "Property",
+      "description": "Rental property details.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "ownerId": { "type": "string" },
+        "address": { "type": "string" },
+        "listingTitle": { "type": "string" },
+        "listingDescription": { "type": "string" },
+        "suggestedPrice": { "type": "number" },
+        "actualPrice": { "type": "number" },
+        "bedrooms": { "type": "number" },
+        "bathrooms": { "type": "number" },
+        "amenities": { "type": "array", "items": { "type": "string" } },
+        "neighborhood": {
+          "type": "object",
+          "properties": {
+            "schools": { "type": "array", "items": { "type": "object" } },
+            "gyms": { "type": "array", "items": { "type": "object" } },
+            "safetyScore": { "type": "number" },
+            "pois": { "type": "array", "items": { "type": "object" } }
+          }
+        },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["ownerId", "address"]
+    },
+    "Application": {
+      "title": "Application",
+      "description": "Tenant application for a property.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "propertyId": { "type": "string" },
+        "applicantId": { "type": "string" },
+        "applicantName": { "type": "string" },
+        "applicantEmail": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "interviewing", "rated", "accepted", "rejected"] },
+        "creditScore": { "type": "number" },
+        "jobHistory": { "type": "string" },
+        "rentalHistory": { "type": "string" },
+        "interviewTranscript": { "type": "array", "items": { "type": "object" } },
+        "aiRating": {
+          "type": "object",
+          "properties": {
+            "score": { "type": "number" },
+            "feedback": { "type": "string" }
+          }
+        },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["propertyId", "applicantId", "status"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": {
+      "schema": "User",
+      "description": "User profiles."
+    },
+    "/properties/{propertyId}": {
+      "schema": "Property",
+      "description": "Rental properties."
+    },
+    "/applications/{applicationId}": {
+      "schema": "Application",
+      "description": "Tenant applications."
+    }
+  }
+}

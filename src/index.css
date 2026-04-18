@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Georgia", serif;
+  --font-sans: "Helvetica Neue", Arial, sans-serif;
+  
+  --color-natural-bg: #f5f5f0;
+  --color-natural-primary: #5A5A40;
+  --color-natural-secondary: #E9E6DD;
+  --color-natural-accent: #8C8C70;
+  --color-natural-text: #2D2D2A;
+  --color-natural-card: #FFFFFF;
+  
+  --shadow-natural: 0 4px 12px rgba(0,0,0,0.05);
+}
